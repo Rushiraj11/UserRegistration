@@ -30,5 +30,15 @@ public class UserRegistrationTest {
         Assert.assertEquals(false, result);
 
     }
+    @Test
+    public void givenEmail_WhenInFormat_ShouldReturnTrue() {
+        boolean result = userRegistration.emailAddress("abc@gmail.com");
+        Assert.assertEquals(true, result);
+    }
 
+    @Test
+    public void givenEmail_WhenOurOfFormat_ShouldReturnFalse() {
+        boolean result = userRegistration.emailAddress("abc#/@gmail.com");
+        Assert.assertEquals(false, result);
+    }
 }
