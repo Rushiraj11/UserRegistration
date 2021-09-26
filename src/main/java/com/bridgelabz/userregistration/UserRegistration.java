@@ -2,12 +2,15 @@ package com.bridgelabz.userregistration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+@FunctionalInterface
+interface UserDetailsValidationFI {
+     public boolean validate(String x) throws UserRegistrationException;
+}
 public class UserRegistration {
     public static void main(String[] args) {
         System.out.println("Welcome To User Registration Program");
     }
-    public boolean firstName(String firstName) throws UserRegistrationException {
+    UserDetailsValidationFI validateFirstName= firstName ->  {
         if (firstName == null) {
             throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
         } else if (firstName.length() == 0) {
@@ -19,8 +22,8 @@ public class UserRegistration {
             Matcher matcher = pattern.matcher(firstName);
             return matcher.matches();
         }
-    }
-    public boolean lastName(String lastName) throws UserRegistrationException  {
+    };
+    UserDetailsValidationFI validateLastName = lastName ->  {
             if (lastName == null) {
                 throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
             } else if (lastName.length() == 0) {
@@ -31,8 +34,9 @@ public class UserRegistration {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(lastName);
         return matcher.matches();
-    }
-    public boolean emailAddress(String email) throws UserRegistrationException  {
+    };
+
+    UserDetailsValidationFI validateEmail = email -> {
         if (email == null) {
             throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
         } else if (email.length() == 0) {
@@ -42,8 +46,9 @@ public class UserRegistration {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
-    }
-    public boolean phoneNumber(String phoneNumber) throws UserRegistrationException  {
+    };
+
+    UserDetailsValidationFI validatePhoneNumber = phoneNumber ->   {
         if (phoneNumber == null) {
             throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
         } else if (phoneNumber.length() == 0) {
@@ -53,8 +58,9 @@ public class UserRegistration {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(phoneNumber);
         return matcher.matches();
-    }
-    public boolean passwordRule1(String password) throws UserRegistrationException  {
+    };
+
+    UserDetailsValidationFI validatePassword1 = password ->  {
         if (password == null) {
             throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
         } else if (password.length() == 0) {
@@ -64,8 +70,9 @@ public class UserRegistration {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
-    }
-    public boolean passwordRule2(String password) throws UserRegistrationException  {
+    };
+
+    UserDetailsValidationFI validatePassword2 = password -> {
         if (password == null) {
             throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
         } else if (password.length() == 0) {
@@ -76,8 +83,9 @@ public class UserRegistration {
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
 
-    }
-    public boolean passwordRule3(String password) throws UserRegistrationException {
+    };
+
+    UserDetailsValidationFI validatePassword3 = password -> {
         if (password == null) {
             throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
         } else if (password.length() == 0) {
@@ -88,8 +96,8 @@ public class UserRegistration {
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
 
-    }
-    public boolean passwordRule4(String password) throws UserRegistrationException {
+    };
+    UserDetailsValidationFI validatePassword4 = password -> {
         if (password == null) {
             throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
         } else if (password.length() == 0) {
@@ -99,8 +107,8 @@ public class UserRegistration {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
-    }
-    public boolean emailIdValidator(String emailId) throws UserRegistrationException {
+    };
+    UserDetailsValidationFI validateEmailId = emailId -> {
         if (emailId == null) {
             throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
         } else if (emailId.length() == 0) {
@@ -110,5 +118,5 @@ public class UserRegistration {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(emailId);
         return matcher.matches();
-    }
+    };
 }
